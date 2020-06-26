@@ -1,8 +1,10 @@
-const baseUrl = "https://api.football-data.org/v2/";
+// Available competition: 2000,2001,2002,2003,2013,2014,2015,2016,2017,2018,2019,2021
+
+const baseURL = "https://api.football-data.org/v2/";
 
 const api_token = "ac4e6663c07745218da11725425871ab";
 
-function fetchAPi(url) {
+function fetchAPI(url) {
   return fetch(url, {
     headers: {
       "X-Auth-Token": api_token,
@@ -25,4 +27,17 @@ function json(response) {
 
 function error(error) {
   console.log("Error: " + error);
+}
+
+function getCompetitions() {
+  preLoader();
+  fetchAPI(baseURL + "competitions?plan=TIER_ONE")
+    .then(status)
+    .then(json)
+    .then(function (data) {
+      console.log(data);
+      hideLoader();
+      renderCompetitions(data);
+    })
+    .catch(error);
 }
