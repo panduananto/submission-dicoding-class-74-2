@@ -55,9 +55,8 @@ nav ul li a::after {
 }
 
 /* Main content home*/
-
 .preloader-wrapper {
-  margin-bottom: 80px
+  margin-bottom: 80px;
 }
 
 .header-hero-content {
@@ -110,8 +109,10 @@ nav ul li a::after {
 
 .competitions-container h2 {
   font-family: "Montserrat", sans-serif;
+  font-size: 20px;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 20px 0;
+  padding: 0 0.75rem;
 }
 
 .competitions-container p {
@@ -176,8 +177,15 @@ nav ul li a::after {
 }
 
 .content-standings-container {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  padding: 50px 0;
+}
+
+.custom-table {
+  border-radius: 20px;
+}
+
+.group-ucl-row span {
+  font-weight: bolder;
 }
 
 .team-name-crest {
@@ -191,7 +199,6 @@ nav ul li a::after {
   margin-right: 20px;
   width: 25px;
 }
-
 
 /* 404 page */
 
@@ -277,13 +284,12 @@ footer .footer-copyrights {
   .valign-wrapper {
     justify-content: center;
   }
-  
+
   .img-custom {
     height: 250px;
     width: 250px;
   }
 }
-
 
 @media screen and (max-width: 600px) {
   .valign-wrapper {
@@ -293,6 +299,12 @@ footer .footer-copyrights {
   .img-custom {
     height: 220px;
     width: 220px;
+  }
+
+  /* Main content standings */
+
+  .td-team img {
+    margin-right: 10px;
   }
 
   .not-found-page span {
@@ -317,4 +329,3 @@ footer .footer-copyrights {
     margin-bottom: 25px;
   }
 }
-

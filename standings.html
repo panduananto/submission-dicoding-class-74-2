@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#651fff" />
     <meta name="description" content="Soccer 101" />
-    <title>Soccer 101 | Pandu Ananto Hogantara</title>
+    <title>Soccer 101</title>
     <link rel="icon" type="image/png" href="./assets/icons/icon-512x512.png" />
     <link rel="manifest" href="./manifest.json" />
     <link
@@ -35,9 +35,9 @@
     <main class="page-main">
       <div id="body-content">
         <div id="header-standings-container"></div>
-        <div class="content-standings-container container">
-          <div class="row">
-            <table class="highlight responsive-table">
+        <div class="content-standings-container blue-grey lighten-5">
+          <div class="custom-table row container white">
+            <table class="centered striped highlight responsive-table">
               <thead>
                 <tr>
                   <th>Positions</th>
@@ -52,13 +52,13 @@
                   <th>PTS</th>
                 </tr>
               </thead>
-  
+
               <tbody id="table-standings-row"></tbody>
             </table>
+            <div id="loader" class="valign-wrapper"></div>
           </div>
         </div>
       </div>
-      <div id="loader" class="valign-wrapper"></div>
     </main>
 
     <footer class="page-footer">

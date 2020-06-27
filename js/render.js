@@ -78,7 +78,14 @@ function renderCompetitions(data) {
   document.getElementById("competitions-row").innerHTML = competitionsHTML;
 }
 
+function imgError(image) {
+  image.onerror = "";
+  image.src = "./assets/images/team_no_crest.svg";
+  return true;
+}
+
 function renderStandings(data) {
+  console.log(data);
   const headerStandingsContainer = document.getElementById(
     "header-standings-container"
   );
@@ -86,38 +93,90 @@ function renderStandings(data) {
     <div class="header-hero-standings valign-wrapper">
       <div class="header-text white-text">
         <p>
-          ${data.competition.name}
+          ${data.competition.area.name} - ${data.competition.name}
         </p>
       </div>
     </div>
   `;
-  let standingsTableHTML = "";
-  data.standings[0].table.forEach(function (results) {
-    let teamCrest = results.team.crestUrl;
-    if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
-      teamCrest = "./assets/images/team_no_crest.svg";
-    }
-    standingsTableHTML += `
-      <tr>
-        <td>${results.position}</td>
-        <td class="td-team">
-          <a href="#">
-            <div class="team-name-crest">
-              <img src="${teamCrest}" class="responsive-img"></img>
-              ${results.team.name}
-            </div>
-          </a>
-        </td>
-        <td>${results.playedGames}</td>
-        <td>${results.won}</td>
-        <td>${results.lost}</td>
-        <td>${results.draw}</td>
-        <td>${results.goalsFor}</td>
-        <td>${results.goalsAgainst}</td>
-        <td>${results.goalDifference}</td>
-        <td>${results.points}</td>
-      </tr>
-    `;
-  });
-  document.getElementById("table-standings-row").innerHTML = standingsTableHTML;
+
+  let competitionID = data.competition.id;
+  if (competitionID === 2001) {
+    let standingsTableHTML = "";
+    data.standings.forEach(function (results) {
+      standingsTableHTML += `
+        <tr class="group-ucl-row">
+          <td>
+            <span>${results.group.replace("_", " ")}</span>
+          </td>
+        </tr>
+      `;
+      results.table.forEach(function (standingResult) {
+        let teamCrest = standingResult.team.crestUrl;
+        if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
+          teamCrest = "./assets/images/team_no_crest.svg";
+        }
+
+        standingsTableHTML += `
+          <tr>
+            <td>${standingResult.position}</td>
+            <td class="td-team">
+              <a href="#">
+                <div class="team-name-crest">
+                  <img 
+                    src="${teamCrest}" 
+                    class="responsive-img" 
+                    onerror="imgError(this)">
+                  </img>
+                  ${standingResult.team.name}
+                </div>
+              </a>
+            </td>
+            <td>${standingResult.playedGames}</td>
+            <td>${standingResult.won}</td>
+            <td>${standingResult.lost}</td>
+            <td>${standingResult.draw}</td>
+            <td>${standingResult.goalsFor}</td>
+            <td>${standingResult.goalsAgainst}</td>
+            <td>${standingResult.goalDifference}</td>
+            <td>${standingResult.points}</td>
+          </tr>
+        `;
+      });
+      document.getElementById(
+        "table-standings-row"
+      ).innerHTML = standingsTableHTML;
+    });
+  } else {
+    let standingsTableHTML = "";
+    data.standings[0].table.forEach(function (results) {
+      let teamCrest = results.team.crestUrl;
+      if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
+        teamCrest = "./assets/images/team_no_crest.svg";
+      }
+      standingsTableHTML += `
+        <tr>
+          <td>${results.position}</td>
+          <td class="td-team">
+            <a href="#">
+              <div class="team-name-crest">
+                <img src="${teamCrest}" class="responsive-img"></img>
+                ${results.team.name}
+              </div>
+            </a>
+          </td>
+          <td>${results.playedGames}</td>
+          <td>${results.won}</td>
+          <td>${results.lost}</td>
+          <td>${results.draw}</td>
+          <td>${results.goalsFor}</td>
+          <td>${results.goalsAgainst}</td>
+          <td>${results.goalDifference}</td>
+          <td>${results.points}</td>
+        </tr>
+      `;
+    });
+    document.getElementById(
+      "table-standings-row"
+    ).innerHTML = standingsTableHTML;
+  }
 }

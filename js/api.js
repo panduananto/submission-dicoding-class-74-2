@@ -45,14 +45,14 @@ function getCompetitions() {
 function getStandings() {
   let urlParams = new URLSearchParams(window.location.search);
   let idParam = urlParams.get("id");
-
+  preLoader();
   fetchAPI(
     baseURL + "competitions/" + idParam + "/standings/?standingType=TOTAL"
   )
     .then(status)
     .then(json)
     .then(function (data) {
-      console.log(data);
+      hideLoader();
       renderStandings(data);
     })
     .catch(error);
