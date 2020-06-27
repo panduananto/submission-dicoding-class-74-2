@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&family=Open+Sans:wght@300;400;600;700;800&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -127,6 +131,67 @@ nav ul li a::after {
   border-radius: 20px;
   padding: 20px;
 }
+
+/* Main content standings */
+
+.header-hero-standings {
+  justify-content: center;
+  background-image: url("../assets/images/header-standing.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 350px;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+}
+
+.header-hero-standings h1 {
+  font-family: "Open-Sans", sans-serif;
+  font-size: 72px;
+}
+
+.header-hero-standings p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 28px;
+}
+
+.header-hero-standings p:after {
+  background-color: #651fff;
+  content: "";
+  display: block;
+  height: 4px;
+  width: 50%;
+  margin: 20px auto;
+}
+
+.header-hero-standings::before {
+  content: "";
+  width: 100%;
+  height: 350px;
+  background: rgba(0, 0, 0, 0.71);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.content-standings-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.team-name-crest {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.td-team img {
+  height: 25px;
+  margin-right: 20px;
+  width: 25px;
+}
+
 
 /* 404 page */
 

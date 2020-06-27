@@ -41,3 +41,19 @@ function getCompetitions() {
     })
     .catch(error);
 }
+
+function getStandings() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let idParam = urlParams.get("id");
+
+  fetchAPI(
+    baseURL + "competitions/" + idParam + "/standings/?standingType=TOTAL"
+  )
+    .then(status)
+    .then(json)
+    .then(function (data) {
+      console.log(data);
+      renderStandings(data);
+    })
+    .catch(error);
+}
