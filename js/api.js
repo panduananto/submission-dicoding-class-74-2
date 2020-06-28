@@ -52,8 +52,22 @@ function getStandings() {
     .then(status)
     .then(json)
     .then(function (data) {
+      console.log(data);
       hideLoader();
       renderStandings(data);
+    })
+    .catch(error);
+}
+
+function getTeams() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let idParam = urlParams.get("id");
+  fetchAPI(baseURL + "teams/" + idParam)
+    .then(status)
+    .then(json)
+    .then(function (data) {
+      console.log(data);
+      renderTeams(data);
     })
     .catch(error);
 }

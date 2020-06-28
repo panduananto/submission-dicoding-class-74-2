@@ -1,4 +1,3 @@
-let currentPage = window.location.pathname.substr(1).split(".")[0];
 const navElement = document.querySelector(".nav-custom");
 window.onscroll = () => {
   let top = window.scrollY;

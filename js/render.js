@@ -60,7 +60,7 @@ function renderCompetitions(data) {
   let competitionsHTML = "";
   data.competitions.slice(0, 11).forEach(function (results) {
     competitionsHTML += `
-      <div class="col s12 m6 l4">
+      <div class="comp-col-container col s12 m6 l4">
         <div class="card small valign-wrapper hoverable">
           <div class="competition-card">
             <a href="./standings.html?id=${results.id}">          
@@ -84,8 +84,13 @@ function imgError(image) {
   return true;
 }
 
+function teamImgError(image) {
+  image.onerror = "";
+  image.src = "./assets/images/team_img_not_found.jpg";
+  return true;
+}
+
 function renderStandings(data) {
-  console.log(data);
   const headerStandingsContainer = document.getElementById(
     "header-standings-container"
   );
@@ -100,7 +105,7 @@ function renderStandings(data) {
   `;
 
   let competitionID = data.competition.id;
-  if (competitionID === 2001) {
+  if (competitionID === 2001 || competitionID === 2018) {
     let standingsTableHTML = "";
     data.standings.forEach(function (results) {
       standingsTableHTML += `
@@ -115,16 +120,19 @@ function renderStandings(data) {
         if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
           teamCrest = "./assets/images/team_no_crest.svg";
         }
-
+        let teamNameAlt = standingResult.team.name
+          .replace(/\s/g, "-")
+          .toLowerCase();
         standingsTableHTML += `
           <tr>
             <td>${standingResult.position}</td>
             <td class="td-team">
-              <a href="#">
+              <a href="./teams.html?id=${standingResult.team.id}">
                 <div class="team-name-crest">
                   <img 
                     src="${teamCrest}" 
-                    class="responsive-img" 
+                    class="responsive-img"
+                    alt="${teamNameAlt}-crest-img"
                     onerror="imgError(this)">
                   </img>
                   ${standingResult.team.name}
@@ -153,13 +161,20 @@ function renderStandings(data) {
       if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
         teamCrest = "./assets/images/team_no_crest.svg";
       }
+
+      let teamNameAlt = results.team.name.replace(/\s/g, "-").toLowerCase();
       standingsTableHTML += `
         <tr>
           <td>${results.position}</td>
           <td class="td-team">
-            <a href="#">
+            <a href="./teams.html?id=${results.team.id}">
               <div class="team-name-crest">
-                <img src="${teamCrest}" class="responsive-img"></img>
+                <img
+                  src="${teamCrest}"
+                  class="responsive-img"
+                  alt="${teamNameAlt}-crest-img"
+                  onerror=imgError(this)>
+                </img>
                 ${results.team.name}
               </div>
             </a>
@@ -179,4 +194,74 @@ function renderStandings(data) {
       "table-standings-row"
     ).innerHTML = standingsTableHTML;
   }
+}
+
+function renderTeams(data) {
+  let activeCompetitions = [];
+  data.activeCompetitions.forEach(function (activeComp) {
+    activeCompetitions.push(activeComp.name);
+  });
+  if (
+    activeCompetitions === null ||
+    activeCompetitions === undefined ||
+    activeCompetitions === "" ||
+    activeCompetitions.length === 0
+  ) {
+    activeCompetitions.push("None");
+  } else {
+    activeCompetitions = activeCompetitions.join(", ");
+  }
+
+  let teamNameAlt = data.name.replace(/\s/g, "-").toLowerCase();
+
+  const teamsPanelContainer = document.querySelector(".teams-panel-container");
+  teamsPanelContainer.innerHTML = `
+    <div class="header-teams-panel">
+      <div class="col s12">
+        <div class="team-card-horizontal-container card horizontal">
+          <div class="card-team-custom">
+            <img
+              class="team-img-custom responsive-img" 
+              src="${data.crestUrl.replace(/^http:\/\//i, "https://")}"
+              alt="${teamNameAlt}-img"
+              onerror=teamImgError(this)>
+            </img>
+            <div class="card-stacked-container">
+              <div class="team-card-content card-content">
+                <h4>${data.name}</h4>
+                <p>${data.address}</p>
+                <p>${data.venue}</p>
+                <h5>Active competition</h5>
+                <p>${activeCompetitions}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  let squadMemberHTML = "";
+  data.squad.forEach(function (squadMember) {
+    let playerNumber = squadMember.shirtNumber;
+    if (
+      playerNumber === null ||
+      playerNumber === undefined ||
+      playerNumber === ""
+    ) {
+      playerNumber = "-";
+    }
+    squadMemberHTML += `
+      <li>
+        <div class="collapsible-header">${squadMember.name}</div>
+        <div class="collapsible-body">
+          <p><span>Nama:</span> ${squadMember.name}</p>
+          <p><span>Kewarganegaraan:</span> ${squadMember.nationality}</p>
+          <p><span>Posisi:</span> ${squadMember.position}</p>
+          <p><span>TTL:</span> ${squadMember.countryOfBirth}, ${squadMember.dateOfBirth}</p>
+        </div>
+      </li>
+    `;
+  });
+  document.getElementById("squad-collapsible").innerHTML = squadMemberHTML;
 }

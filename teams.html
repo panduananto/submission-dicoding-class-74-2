@@ -34,31 +34,11 @@
 
     <main class="page-main">
       <div id="body-content">
-        <div id="header-standings-container"></div>
-        <div class="content-standings-container blue-grey lighten-5">
-          <div class="custom-table-container row container white">
-            <table class="custom-table centered striped responsive-table">
-              <thead>
-                <tr>
-                  <th>Positions</th>
-                  <th>Clubs</th>
-                  <th>MP</th>
-                  <th>W</th>
-                  <th>D</th>
-                  <th>L</th>
-                  <th>GF</th>
-                  <th>GA</th>
-                  <th>GD</th>
-                  <th>PTS</th>
-                </tr>
-              </thead>
-
-              <tbody id="table-standings-row"></tbody>
-            </table>
-            <div class="container-loader">
-              <div id="loader" class="valign-wrapper"></div>
-            </div>
-          </div>
+        <div class="header-hero-teams"></div>
+        <div class="teams-panel-container container"></div>
+        <div class="content-teams-container container">
+          <h2>Team member</h2>
+          <ul id="squad-collapsible" class="collapsible-custom collapsible"></ul>
         </div>
       </div>
     </main>
@@ -142,7 +122,9 @@
     <script src="js/api.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        getStandings();
+        getTeams();
+        let collapsElement = document.querySelectorAll(".collapsible");
+        M.Collapsible.init(collapsElement);
       });
     </script>
   </body>

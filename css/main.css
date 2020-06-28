@@ -55,6 +55,7 @@ nav ul li a::after {
 }
 
 /* Main content home*/
+
 .preloader-wrapper {
   margin-bottom: 80px;
 }
@@ -127,7 +128,7 @@ nav ul li a::after {
   font-weight: 300;
 }
 
-.card {
+.competitions-container .card {
   background-color: #eceff1;
   border-radius: 20px;
   padding: 20px;
@@ -180,7 +181,7 @@ nav ul li a::after {
   padding: 50px 0;
 }
 
-.custom-table {
+.custom-table-container {
   border-radius: 20px;
 }
 
@@ -198,6 +199,98 @@ nav ul li a::after {
   height: 25px;
   margin-right: 20px;
   width: 25px;
+}
+
+/* Main content teams */
+
+.header-hero-teams {
+  justify-content: center;
+  background-image: url("../assets/images/header-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 350px;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+}
+
+.header-hero-teams::before {
+  content: "";
+  width: 100%;
+  height: 350px;
+  background: rgba(0, 0, 0, 0.71);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.header-teams-panel {
+  position: relative;
+  margin-top: -200px;
+}
+
+.header-teams-panel .card {
+  border-radius: 20px;
+  margin: 0;
+  padding: 50px;
+}
+
+.team-card-horizontal-container {
+  justify-content: center;
+}
+
+.card-team-custom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-card-content {
+  margin: 0 20px;
+}
+
+.team-card-content h4 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.team-card-content h5 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 20px 0 10px 0;
+}
+
+.team-card-content p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.team-img-custom {
+  max-height: 300px;
+  width: 250px;
+}
+
+.content-teams-container h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 50px 0 20px 0;
+}
+
+.collapsible-custom {
+  font-family: "Open-Sans", sans-serif;
+  font-size: 18px;
+  margin: 20px 0 50px 0;
+}
+
+.collapsible-custom .collapsible-body span {
+  font-weight: bolder;
 }
 
 /* 404 page */
@@ -280,24 +373,73 @@ footer .footer-copyrights {
 
 /* Responsive breakpoints */
 
+@media screen and (max-width: 992px) {
+  /* Main content teams */
+
+  .card-team-custom {
+    flex-direction: column;
+  }
+
+  .team-card-horizontal-container {
+    padding: 10px 10px !important;
+  }
+
+  .team-img-custom {
+    max-height: 250px;
+    padding-top: 24px;
+    width: 200px;
+  }
+
+  .team-card-content {
+    text-align: center;
+    margin: 0;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .team-card-content h4 {
+    font-size: 30px;
+  }
+
+  .team-card-content h5 {
+    font-size: 24px;
+  }
+
+  .team-card-content p {
+    font-size: 20px;
+  }
+}
+
 @media screen and (min-width: 600px) {
-  .valign-wrapper {
+  .container-loader .valign-wrapper {
     justify-content: center;
   }
 
-  .img-custom {
-    height: 250px;
+  /* Main content competitions */
+
+  .comp-col-container .valign-wrapper {
+    justify-content: center;
+  }
+
+  .competition-card .img-custom {
+    max-height: 250px;
     width: 250px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .valign-wrapper {
+  .container-loader .valign-wrapper {
     justify-content: center;
   }
 
-  .img-custom {
-    height: 220px;
+  /* Main content competitions */
+
+  .comp-col-container .valign-wrapper {
+    justify-content: center;
+  }
+
+  .competition-card .img-custom {
+    max-height: 220px;
     width: 220px;
   }
 
@@ -306,6 +448,22 @@ footer .footer-copyrights {
   .td-team img {
     margin-right: 10px;
   }
+
+  /* Main content teams */
+
+  .team-card-content h4 {
+    font-size: 26px;
+  }
+
+  .team-card-content h5 {
+    font-size: 20px;
+  }
+
+  .team-card-content p {
+    font-size: 16px;
+  }
+
+  /* 404 page */
 
   .not-found-page span {
     font-family: "Montserrat", sans-serif;
