@@ -62,11 +62,13 @@ function getStandings() {
 function getTeams() {
   let urlParams = new URLSearchParams(window.location.search);
   let idParam = urlParams.get("id");
+  preLoader();
   fetchAPI(baseURL + "teams/" + idParam)
     .then(status)
     .then(json)
     .then(function (data) {
       console.log(data);
+      hideLoader();
       renderTeams(data);
     })
     .catch(error);

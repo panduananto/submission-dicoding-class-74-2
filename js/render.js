@@ -258,6 +258,7 @@ function renderTeams(data) {
           <p><span>Nama:</span> ${squadMember.name}</p>
           <p><span>Kewarganegaraan:</span> ${squadMember.nationality}</p>
           <p><span>Posisi:</span> ${squadMember.position}</p>
+          <p><span>Nomor pemain:</span> ${playerNumber}</p>
           <p><span>TTL:</span> ${squadMember.countryOfBirth}, ${squadMember.dateOfBirth}</p>
         </div>
       </li>

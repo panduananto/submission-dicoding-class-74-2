@@ -185,6 +185,10 @@ nav ul li a::after {
   border-radius: 20px;
 }
 
+.custom-table {
+  font-family: "Open-Sans", sans-serif;
+}
+
 .group-ucl-row span {
   font-weight: bolder;
 }
