@@ -85,25 +85,29 @@ function getStandings() {
 }
 
 function getTeams() {
-  let urlParams = new URLSearchParams(window.location.search);
-  let idParam = urlParams.get("id");
-  preLoader();
-  if ("caches" in window) {
-    caches.match(baseURL + "teams/" + idParam).then(function (response) {
-      if (response) {
-        response.json().then(function (data) {
-          hideLoader();
-          renderTeams(data);
-        });
-      }
-    });
-  }
-  fetchAPI(baseURL + "teams/" + idParam)
-    .then(status)
-    .then(json)
-    .then(function (data) {
-      hideLoader();
-      renderTeams(data);
-    })
-    .catch(error);
+  return new Promise(function (resolve, reject) {
+    let urlParams = new URLSearchParams(window.location.search);
+    let idParam = urlParams.get("id");
+    preLoader();
+    if ("caches" in window) {
+      caches.match(baseURL + "teams/" + idParam).then(function (response) {
+        if (response) {
+          response.json().then(function (data) {
+            hideLoader();
+            renderTeams(data);
+            resolve(data);
+          });
+        }
+      });
+    }
+    fetchAPI(baseURL + "teams/" + idParam)
+      .then(status)
+      .then(json)
+      .then(function (data) {
+        hideLoader();
+        renderTeams(data);
+        resolve(data);
+      })
+      .catch(error);
+  });
 }
