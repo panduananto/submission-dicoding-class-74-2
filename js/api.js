@@ -6,6 +6,7 @@ const api_token = "ac4e6663c07745218da11725425871ab";
 
 function fetchAPI(url) {
   return fetch(url, {
+    mode: "cors",
     headers: {
       "X-Auth-Token": api_token,
     },

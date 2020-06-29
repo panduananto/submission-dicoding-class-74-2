@@ -39,7 +39,9 @@ function pageOffline() {
   headerElement.style.display = "none";
   footerElement.style.display = "none";
 
-  content.innerHTML = `
+  const bodyContentElement = document.querySelector("#body-content");
+
+  bodyContentElement.innerHTML = `
     <div class="not-found-page valign-wrapper">
       <img class="responsive-img" src="./assets/images/offline.svg" alt="404-image"></img>
       <span>No Internet Connection</span>
@@ -218,15 +220,17 @@ function renderTeams(data) {
   data.activeCompetitions.forEach(function (activeComp) {
     activeCompetitions.push(activeComp.name);
   });
-  if (
-    activeCompetitions === null ||
-    activeCompetitions === undefined ||
-    activeCompetitions === "" ||
-    activeCompetitions.length === 0
-  ) {
+  if (activeCompetitions.length === 0) {
     activeCompetitions.push("None");
   } else {
     activeCompetitions = activeCompetitions.join(", ");
+  }
+
+  let teamCrest = data.crestUrl;
+  if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
+    teamCrest = "./assets/images/team_img_not_found.jpg";
+  } else {
+    teamCrest = teamCrest.replace(/^http:\/\//i, "https://");
   }
 
   let teamNameAlt = data.name.replace(/\s/g, "-").toLowerCase();
@@ -239,7 +243,7 @@ function renderTeams(data) {
           <div class="card-team-custom">
             <img
               class="team-img-custom responsive-img" 
-              src="${data.crestUrl.replace(/^http:\/\//i, "https://")}"
+              src="${teamCrest}"
               alt="${teamNameAlt}-img"
               onerror=teamImgError(this)>
             </img>
