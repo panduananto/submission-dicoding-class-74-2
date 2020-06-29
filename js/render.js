@@ -32,6 +32,23 @@ function pageCannotAccess(content) {
   `;
 }
 
+function pageOffline() {
+  const headerElement = document.querySelector(".page-header");
+  const footerElement = document.querySelector(".page-footer");
+
+  headerElement.style.display = "none";
+  footerElement.style.display = "none";
+
+  content.innerHTML = `
+    <div class="not-found-page valign-wrapper">
+      <img class="responsive-img" src="./assets/images/offline.svg" alt="404-image"></img>
+      <span>No Internet Connection</span>
+      <p>Mohon periksa koneksi internet Anda</p>
+      <a href="./" class="btn-go-home deep-purple accent-3 btn">GO HOME</a>
+    </div>
+  `;
+}
+
 function preLoader() {
   let pageLoader = "";
   pageLoader += `

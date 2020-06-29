@@ -31,11 +31,22 @@ function error(error) {
 
 function getCompetitions() {
   preLoader();
+  if ("caches" in window) {
+    caches
+      .match(baseURL + "competitions?plan=TIER_ONE")
+      .then(function (response) {
+        if (response) {
+          response.json().then(function (data) {
+            hideLoader();
+            renderCompetitions(data);
+          });
+        }
+      });
+  }
   fetchAPI(baseURL + "competitions?plan=TIER_ONE")
     .then(status)
     .then(json)
     .then(function (data) {
-      console.log(data);
       hideLoader();
       renderCompetitions(data);
     })
@@ -46,13 +57,26 @@ function getStandings() {
   let urlParams = new URLSearchParams(window.location.search);
   let idParam = urlParams.get("id");
   preLoader();
+  if ("caches" in window) {
+    caches
+      .match(
+        baseURL + "competitions/" + idParam + "/standings/?standingType=TOTAL"
+      )
+      .then(function (response) {
+        if (response) {
+          response.json().then(function (data) {
+            hideLoader();
+            renderStandings(data);
+          });
+        }
+      });
+  }
   fetchAPI(
     baseURL + "competitions/" + idParam + "/standings/?standingType=TOTAL"
   )
     .then(status)
     .then(json)
     .then(function (data) {
-      console.log(data);
       hideLoader();
       renderStandings(data);
     })
@@ -63,11 +87,20 @@ function getTeams() {
   let urlParams = new URLSearchParams(window.location.search);
   let idParam = urlParams.get("id");
   preLoader();
+  if ("caches" in window) {
+    caches.match(baseURL + "teams/" + idParam).then(function (response) {
+      if (response) {
+        response.json().then(function (data) {
+          hideLoader();
+          renderTeams(data);
+        });
+      }
+    });
+  }
   fetchAPI(baseURL + "teams/" + idParam)
     .then(status)
     .then(json)
     .then(function (data) {
-      console.log(data);
       hideLoader();
       renderTeams(data);
     })
