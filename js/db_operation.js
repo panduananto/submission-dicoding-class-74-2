@@ -27,3 +27,18 @@ function addTeamToFavorite(team) {
       console.log(error);
     });
 }
+
+function getAllFavoriteTeam() {
+  return new Promise(function (resolve, reject) {
+    dbPromised
+      .then(function (db) {
+        const tx = db.transaction("teams_favorite", "readonly");
+        const store = tx.objectStore("teams_favorite");
+
+        return store.getAll();
+      })
+      .then(function (teams) {
+        resolve(teams);
+      });
+  });
+}

@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const favoriteButton = document.getElementById("favorite-button");
   favoriteButton.onclick = function () {
-    console.log("fab clicked");
     item.then(function (team) {
       addTeamToFavorite(team);
     });

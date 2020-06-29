@@ -134,6 +134,92 @@ nav ul li a::after {
   padding: 20px;
 }
 
+/* Main content favorite */
+
+.header-hero-favorite {
+  justify-content: center;
+  background-image: url("../assets/images/header-team.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  position: relative;
+  text-align: center;
+  z-index: 0;
+}
+
+.header-hero-favorite::before {
+  content: "";
+  width: 100%;
+  height: 400px;
+  background: rgba(0, 0, 0, 0.71);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.header-hero-favorite h1 {
+  font-family: "Open-Sans", sans-serif;
+  font-size: 72px;
+}
+
+.header-hero-favorite p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 28px;
+}
+
+.header-hero-favorite p:after {
+  background-color: #651fff;
+  content: "";
+  display: block;
+  height: 4px;
+  width: 50%;
+  margin: 20px auto;
+}
+
+.fav-col-container {
+  margin: 10px 0;
+}
+
+.fav-col-container h6 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.favorite-container {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.favorite-container h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  padding: 0 0.75rem;
+}
+
+.favorite-container p {
+  font-family: "Open-Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.favorite-container a {
+  font-family: "Open-Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.favorite-container .card {
+  background-color: #eceff1;
+  border-radius: 20px;
+  padding: 20px;
+}
+
 /* Main content standings */
 
 .header-hero-standings {
@@ -429,6 +515,17 @@ footer .footer-copyrights {
     max-height: 250px;
     width: 250px;
   }
+
+  /* Main content favorite */
+
+  .fav-col-container .valign-wrapper {
+    justify-content: center;
+  }
+
+  .favorite-card .img-custom {
+    max-height: 250px;
+    width: 250px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -443,6 +540,17 @@ footer .footer-copyrights {
   }
 
   .competition-card .img-custom {
+    max-height: 220px;
+    width: 220px;
+  }
+
+  /* Main content favorite */
+
+  .fav-col-container .valign-wrapper {
+    justify-content: center;
+  }
+
+  .favorite-card .img-custom {
     max-height: 220px;
     width: 220px;
   }

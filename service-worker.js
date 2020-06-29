@@ -1,4 +1,4 @@
-const CACHE_NAME = "football-v20";
+const CACHE_NAME = "football-v41";
 
 let urlsToCache = [
   "/",
@@ -51,6 +51,7 @@ let urlsToCache = [
   "/assets/images/SA.png",
   "/assets/images/header-background.jpg",
   "/assets/images/header-standing.jpg",
+  "/assets/images/header-team.jpg",
   "/assets/images/team_img_not_found.jpg",
 ];
 

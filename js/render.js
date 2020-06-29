@@ -287,3 +287,35 @@ function renderTeams(data) {
   });
   document.getElementById("squad-collapsible").innerHTML = squadMemberHTML;
 }
+
+function renderFavoriteTeam(data) {
+  let favoriteTeamHTML = "";
+  data.forEach(function (results) {
+    let teamCrest = results.crestUrl;
+    if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
+      teamCrest = "./assets/images/team_img_not_found.jpg";
+    } else {
+      teamCrest = teamCrest.replace(/^http:\/\//i, "https://");
+    }
+
+    let teamNameAlt = results.name.replace(/\s/g, "-").toLowerCase();
+
+    favoriteTeamHTML += `
+      <div class="fav-col-container col s12 m6 l4">
+        <div class="card small valign-wrapper hoverable">
+          <div class="favorite-card">
+            <a href="./teams.html?id=${results.id}">          
+              <img
+                class="img-custom responsive-img"
+                src="${teamCrest}"
+                alt="${teamNameAlt}-image"
+              />
+            </a>
+          </div>
+        </div>
+        <h6 class="center-align">${results.name}</h6>
+      </div>
+    `;
+  });
+  document.getElementById("favorite-team-row").innerHTML = favoriteTeamHTML;
+}

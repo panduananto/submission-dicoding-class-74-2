@@ -111,3 +111,9 @@ function getTeams() {
       .catch(error);
   });
 }
+
+function getFavoriteTeam() {
+  getAllFavoriteTeam().then(function (teams) {
+    renderFavoriteTeam(teams);
+  });
+}

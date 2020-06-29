@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
           content.innerHTML = xhttp.responseText;
           if (page === "home") {
             getCompetitions();
-          } else if (page === "favorites-team") {
-            console.log("Masuk ke halaman favorites team");
+          } else if (page === "favorites") {
+            getFavoriteTeam();
           }
         } else if (this.status === 404) {
           pageNotFound(content);
