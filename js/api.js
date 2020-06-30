@@ -106,6 +106,7 @@ function getTeams() {
       .then(function (data) {
         hideLoader();
         renderTeams(data);
+        renderFavoriteDeleteButton(data);
         resolve(data);
       })
       .catch(error);

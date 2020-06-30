@@ -4,10 +4,22 @@ document.addEventListener("DOMContentLoaded", function () {
   let collapsElement = document.querySelectorAll(".collapsible");
   M.Collapsible.init(collapsElement);
 
-  const favoriteButton = document.getElementById("favorite-button");
-  favoriteButton.onclick = function () {
-    item.then(function (team) {
-      addTeamToFavorite(team);
-    });
+  const favoriteDeleteButton = document.getElementById(
+    "favorite-delete-button"
+  );
+
+  favoriteDeleteButton.onclick = function () {
+    let favoriteDeleteButtonStatus = favoriteDeleteButton.children[0].innerHTML;
+    if (favoriteDeleteButtonStatus === "favorite") {
+      item.then(function (team) {
+        addTeamToFavorite(team);
+        renderFavoriteDeleteButton(team);
+      });
+    } else {
+      item.then(function (team) {
+        deleteTeamFromFavorite(team);
+        renderFavoriteDeleteButton(team);
+      });
+    }
   };
 });

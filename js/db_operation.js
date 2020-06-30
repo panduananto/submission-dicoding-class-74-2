@@ -42,3 +42,39 @@ function getAllFavoriteTeam() {
       });
   });
 }
+
+function checkIfTeamIsFavorite(id) {
+  return new Promise(function (resolve, reject) {
+    dbPromised
+      .then(function (db) {
+        const tx = db.transaction("teams_favorite", "readonly");
+        const store = tx.objectStore("teams_favorite");
+
+        return store.get(id);
+      })
+      .then(function (data) {
+        if (data != undefined || data != null) {
+          resolve(true);
+        } else {
+          reject(false);
+        }
+      });
+  });
+}
+
+function deleteTeamFromFavorite(team) {
+  dbPromised
+    .then(function (db) {
+      const tx = db.transaction("teams_favorite", "readwrite");
+      const store = tx.objectStore("teams_favorite");
+
+      store.delete(team.id);
+      return tx.complete;
+    })
+    .then(function () {
+      M.toast({ html: `${team.name} berhasil dihapus dari daftar favorite` });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}

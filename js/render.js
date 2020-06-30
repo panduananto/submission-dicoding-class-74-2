@@ -288,34 +288,61 @@ function renderTeams(data) {
   document.getElementById("squad-collapsible").innerHTML = squadMemberHTML;
 }
 
+function renderFavoriteDeleteButton(data) {
+  const favoriteDeleteButton = document.getElementById(
+    "favorite-delete-button"
+  );
+  let favoriteDeleteButtonStatus = favoriteDeleteButton.children[0];
+
+  checkIfTeamIsFavorite(data.id)
+    .then(function () {
+      favoriteDeleteButtonStatus.innerHTML = "delete";
+    })
+    .catch(function () {
+      favoriteDeleteButtonStatus.innerHTML = "favorite";
+    });
+}
+
 function renderFavoriteTeam(data) {
   let favoriteTeamHTML = "";
-  data.forEach(function (results) {
-    let teamCrest = results.crestUrl;
-    if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
-      teamCrest = "./assets/images/team_img_not_found.jpg";
-    } else {
-      teamCrest = teamCrest.replace(/^http:\/\//i, "https://");
-    }
+  if (data.length > 0) {
+    data.forEach(function (results) {
+      let teamCrest = results.crestUrl;
+      if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
+        teamCrest = "./assets/images/team_img_not_found.jpg";
+      } else {
+        teamCrest = teamCrest.replace(/^http:\/\//i, "https://");
+      }
 
-    let teamNameAlt = results.name.replace(/\s/g, "-").toLowerCase();
+      let teamNameAlt = results.name.replace(/\s/g, "-").toLowerCase();
 
-    favoriteTeamHTML += `
-      <div class="fav-col-container col s12 m6 l4">
-        <div class="card small valign-wrapper hoverable">
-          <div class="favorite-card">
-            <a href="./teams.html?id=${results.id}">          
-              <img
-                class="img-custom responsive-img"
-                src="${teamCrest}"
-                alt="${teamNameAlt}-image"
-              />
-            </a>
+      favoriteTeamHTML += `
+          <div class="fav-col-container col s12 m6 l4">
+            <div class="card small valign-wrapper hoverable">
+              <div class="favorite-card">
+                <a href="./teams.html?id=${results.id}">          
+                  <img
+                    class="img-custom responsive-img"
+                    src="${teamCrest}"
+                    alt="${teamNameAlt}-image"
+                  />
+                </a>
+              </div>
+            </div>
+            <h6 class="center-align">${results.name}</h6>
           </div>
+        `;
+    });
+  } else {
+    favoriteTeamHTML += `
+      <div class="col s12">
+        <div class="card-panel red accent-3">
+          <h5 class="white-text center-align">
+            You don't have any favorite teams yet
+          </h5>
         </div>
-        <h6 class="center-align">${results.name}</h6>
       </div>
     `;
-  });
+  }
   document.getElementById("favorite-team-row").innerHTML = favoriteTeamHTML;
 }

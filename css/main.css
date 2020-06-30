@@ -220,6 +220,12 @@ nav ul li a::after {
   padding: 20px;
 }
 
+.favorite-container h5 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 36px;
+  font-weight: 300;
+}
+
 /* Main content standings */
 
 .header-hero-standings {
