@@ -1,4 +1,4 @@
-const CACHE_NAME = "football-v43";
+const CACHE_NAME = "football-v44";
 
 let urlsToCache = [
   "/",

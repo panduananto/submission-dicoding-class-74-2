@@ -21,7 +21,9 @@ function addTeamToFavorite(team) {
       return tx.complete;
     })
     .then(function () {
-      M.toast({ html: `${team.name} berhasil ditambahkan ke daftar favorite` });
+      let message = `${team.name} berhasil ditambahkan ke daftar favorite`;
+      M.toast({ html: message });
+      showNotification(message);
     })
     .catch(function (error) {
       console.log(error);
@@ -72,9 +74,28 @@ function deleteTeamFromFavorite(team) {
       return tx.complete;
     })
     .then(function () {
-      M.toast({ html: `${team.name} berhasil dihapus dari daftar favorite` });
+      let message = `${team.name} berhasil dihapus dari daftar favorite`;
+      M.toast({ html: message });
+      showNotification(message);
     })
     .catch(function (error) {
       console.log(error);
     });
+}
+
+function showNotification(message) {
+  const title = "Soccer 101";
+  const options = {
+    body: message,
+    icon: "/assets/icons/icon-512x512.png",
+    badge: "/assets/icons/icon-512x512.png",
+  };
+
+  if (Notification.permission === "granted") {
+    navigator.serviceWorker.ready.then(function (registration) {
+      registration.showNotification(title, options);
+    });
+  } else {
+    console.error("fitur notifikasi tidak diijinkan");
+  }
 }
