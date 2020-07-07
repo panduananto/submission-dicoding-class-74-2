@@ -1,3 +1,5 @@
+import idb from 'idb';
+
 const dbPromised = idb.open("football", 1, function (upgradeDb) {
   let teamsObjectStore = upgradeDb.createObjectStore("teams_favorite", {
     keyPath: "id",
@@ -17,7 +19,7 @@ function addTeamToFavorite(team) {
         crestUrl: team.crestUrl,
       };
 
-      store.add(item);
+      store.put(item);
       return tx.complete;
     })
     .then(function () {
@@ -87,8 +89,8 @@ function showNotification(message) {
   const title = "Soccer 101";
   const options = {
     body: message,
-    icon: "/assets/icons/icon-512x512.png",
-    badge: "/assets/icons/icon-512x512.png",
+    icon: "/icons/icon-512x512.png",
+    badge: "/icons/icon-512x512.png",
   };
 
   if (Notification.permission === "granted") {
@@ -99,3 +101,10 @@ function showNotification(message) {
     console.error("fitur notifikasi tidak diijinkan");
   }
 }
+
+export {
+  addTeamToFavorite,
+  getAllFavoriteTeam,
+  checkIfTeamIsFavorite,
+  deleteTeamFromFavorite,
+};

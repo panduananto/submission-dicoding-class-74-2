@@ -1,5 +1,6 @@
 {
   "name": "Soccer101",
+  "gcm_sender_id": "307910579934",
   "short_name": "Soccer101",
   "theme_color": "#651fff",
   "background_color": "#ffffff",

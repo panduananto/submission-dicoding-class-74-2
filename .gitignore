@@ -1,0 +1,10 @@
+.firebaserc
+/.firebase
+/dist
+/node_modules
+/public
+app_server_key.txt
+firebase-debug.log
+hosting.txt
+firebase.json
+package-lock.json

@@ -1,4 +1,13 @@
+import "../../node_modules/materialize-css/dist/css/materialize.min.css";
+import "../../node_modules/materialize-css/dist/js/materialize.min.js";
+import "../css/main.css";
+import navBarToStick from "./util.js";
+import { getTeams } from "./api.js";
+import { addTeamToFavorite, deleteTeamFromFavorite } from "./db_operation.js";
+import { renderFavoriteDeleteButton } from "./render.js";
+
 document.addEventListener("DOMContentLoaded", function () {
+  navBarToStick();
   let item = getTeams();
 
   let collapsElement = document.querySelectorAll(".collapsible");

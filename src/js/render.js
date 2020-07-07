@@ -1,3 +1,5 @@
+import { checkIfTeamIsFavorite } from "./db_operation";
+
 function pageNotFound(content) {
   const headerElement = document.querySelector(".page-header");
   const footerElement = document.querySelector(".page-footer");
@@ -7,7 +9,7 @@ function pageNotFound(content) {
 
   content.innerHTML = `
     <div class="not-found-page valign-wrapper">
-      <img class="responsive-img" src="./assets/images/404.svg" alt="404-image"></img>
+      <img class="responsive-img" src="/images/404.svg" alt="404-image"></img>
       <span>Page not found</span>
       <p>Maaf, halaman yang Anda tuju tidak dapat ditemukan</p>
       <a href="./" class="btn-go-home deep-purple accent-3 btn">GO HOME</a>
@@ -24,7 +26,7 @@ function pageCannotAccess(content) {
 
   content.innerHTML = `
     <div class="not-found-page valign-wrapper">
-      <img class="responsive-img" src="./assets/images/cannot_access.svg" alt="404-image"></img>
+      <img class="responsive-img" src="/images/cannot_access.svg" alt="404-image"></img>
       <span>Access Forbidden</span>
       <p>Maaf, Anda tidak bisa mengakses halaman ini</p>
       <a href="./" class="btn-go-home deep-purple accent-3 btn">GO HOME</a>
@@ -43,7 +45,7 @@ function pageOffline() {
 
   bodyContentElement.innerHTML = `
     <div class="not-found-page valign-wrapper">
-      <img class="responsive-img" src="./assets/images/offline.svg" alt="404-image"></img>
+      <img class="responsive-img" src="/images/offline.svg" alt="404-image"></img>
       <span>No Internet Connection</span>
       <p>Mohon periksa koneksi internet Anda</p>
       <a href="./" class="btn-go-home deep-purple accent-3 btn">GO HOME</a>
@@ -85,7 +87,7 @@ function renderCompetitions(data) {
             <a href="./standings.html?id=${results.id}">          
               <img
                 class="img-custom responsive-img"
-                src="/assets/images/${results.code}.png"
+                src="/images/${results.code}.png"
                 alt="${results.code}-image"
               />
             </a>
@@ -95,18 +97,6 @@ function renderCompetitions(data) {
     `;
   });
   document.getElementById("competitions-row").innerHTML = competitionsHTML;
-}
-
-function imgError(image) {
-  image.onerror = "";
-  image.src = "./assets/images/team_no_crest.svg";
-  return true;
-}
-
-function teamImgError(image) {
-  image.onerror = "";
-  image.src = "./assets/images/team_img_not_found.jpg";
-  return true;
 }
 
 function renderStandings(data) {
@@ -137,7 +127,7 @@ function renderStandings(data) {
       results.table.forEach(function (standingResult) {
         let teamCrest = standingResult.team.crestUrl;
         if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
-          teamCrest = "./assets/images/team_no_crest.svg";
+          teamCrest = "./images/team_no_crest.svg";
         }
         let teamNameAlt = standingResult.team.name
           .replace(/\s/g, "-")
@@ -152,7 +142,7 @@ function renderStandings(data) {
                     src="${teamCrest}" 
                     class="responsive-img"
                     alt="${teamNameAlt}-crest-img"
-                    onerror="imgError(this)">
+                    onerror="this.onerror=null;this.src='/images/team_no_crest.svg'">
                   </img>
                   ${standingResult.team.name}
                 </div>
@@ -178,7 +168,7 @@ function renderStandings(data) {
     data.standings[0].table.forEach(function (results) {
       let teamCrest = results.team.crestUrl;
       if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
-        teamCrest = "./assets/images/team_no_crest.svg";
+        teamCrest = "./images/team_no_crest.svg";
       }
 
       let teamNameAlt = results.team.name.replace(/\s/g, "-").toLowerCase();
@@ -192,7 +182,7 @@ function renderStandings(data) {
                   src="${teamCrest}"
                   class="responsive-img"
                   alt="${teamNameAlt}-crest-img"
-                  onerror=imgError(this)>
+                  onerror="this.onerror=null;this.src='/images/team_no_crest.svg'">
                 </img>
                 ${results.team.name}
               </div>
@@ -228,7 +218,7 @@ function renderTeams(data) {
 
   let teamCrest = data.crestUrl;
   if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
-    teamCrest = "./assets/images/team_img_not_found.jpg";
+    teamCrest = "/images/team_img_not_found.jpg";
   } else {
     teamCrest = teamCrest.replace(/^http:\/\//i, "https://");
   }
@@ -245,7 +235,7 @@ function renderTeams(data) {
               class="team-img-custom responsive-img" 
               src="${teamCrest}"
               alt="${teamNameAlt}-img"
-              onerror=teamImgError(this)>
+              onerror="this.onerror=null;this.src='/images/team_img_not_found.jpg'">
             </img>
             <div class="card-stacked-container">
               <div class="team-card-content card-content">
@@ -309,7 +299,7 @@ function renderFavoriteTeam(data) {
     data.forEach(function (results) {
       let teamCrest = results.crestUrl;
       if (teamCrest === null || teamCrest === undefined || teamCrest === "") {
-        teamCrest = "./assets/images/team_img_not_found.jpg";
+        teamCrest = "/images/team_img_not_found.jpg";
       } else {
         teamCrest = teamCrest.replace(/^http:\/\//i, "https://");
       }
@@ -346,3 +336,15 @@ function renderFavoriteTeam(data) {
   }
   document.getElementById("favorite-team-row").innerHTML = favoriteTeamHTML;
 }
+
+export {
+  pageNotFound,
+  pageCannotAccess,
+  renderCompetitions,
+  renderStandings,
+  renderTeams,
+  renderFavoriteTeam,
+  renderFavoriteDeleteButton,
+  preLoader,
+  hideLoader,
+};

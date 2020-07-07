@@ -1,3 +1,6 @@
+import { getCompetitions, getFavoriteTeam } from "./api.js";
+import { pageNotFound, pageCannotAccess } from "./render.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   const sideNavElement = document.querySelectorAll(".sidenav");
   M.Sidenav.init(sideNavElement);

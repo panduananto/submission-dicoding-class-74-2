@@ -1,5 +1,16 @@
 // Available competition: 2000,2001,2002,2003,2013,2014,2015,2016,2017,2018,2019,2021
 
+import {
+  renderCompetitions,
+  renderStandings,
+  renderTeams,
+  renderFavoriteTeam,
+  renderFavoriteDeleteButton,
+  preLoader,
+  hideLoader,
+} from "./render.js";
+import { getAllFavoriteTeam } from "./db_operation.js";
+
 const baseURL = "https://api.football-data.org/v2/";
 
 const api_token = "ac4e6663c07745218da11725425871ab";
@@ -118,3 +129,5 @@ function getFavoriteTeam() {
     renderFavoriteTeam(teams);
   });
 }
+
+export { getCompetitions, getStandings, getTeams, getFavoriteTeam };
